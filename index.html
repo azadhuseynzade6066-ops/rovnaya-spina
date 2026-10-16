@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<title>Ровная спина — 30 дней</title>
+<style>
+:root{--blue:#2563eb;--pale:#eaf2ff;--green:#15803d;--ink:#172033;--muted:#657087;--line:#e4e9f2}
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:760px;margin:auto;padding:18px 14px 40px}
+.hero{background:linear-gradient(135deg,#dceafe,#f0f7ff);border-radius:24px;padding:24px 20px;margin-bottom:16px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#2457a7}
+h1{font-size:clamp(27px,7vw,38px);line-height:1.08;margin:8px 0 10px}
+p{line-height:1.5}.muted{color:var(--muted);font-size:14px}
+.progress-card,.task,.calendar,.safety{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar{height:10px;border-radius:99px;background:#e8edf5;overflow:hidden;margin-top:12px}.fill{height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .2s}
+h2{font-size:20px;margin:0 0 12px}.daytitle{font-size:24px;font-weight:800;margin:4px 0}
+.pill{display:inline-block;background:var(--pale);color:#2457a7;padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
+.exercise{background:#f8fafc;border-radius:16px;padding:14px;margin:12px 0}
+.exercise strong{display:block;margin-bottom:5px}
+button{font:inherit;border:0;border-radius:13px;padding:12px 14px;font-weight:750;cursor:pointer}
+.primary{background:var(--blue);color:white}.secondary{background:#edf1f7;color:var(--ink)}button:disabled{opacity:.4;cursor:not-allowed}
+.actions{display:flex;gap:10px;margin-top:14px}.actions button{flex:1}
+.days{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.day{padding:11px 3px;background:#f0f3f8;color:#344054;border:2px solid transparent;border-radius:12px;min-height:49px}
+.day.selected{border-color:var(--blue);background:#eaf2ff;color:#1746a2}.day.done{background:#dcfce7;color:#166534}
+.day small{display:block;font-size:10px;margin-top:3px}
+.checkrow{display:flex;align-items:center;gap:10px;background:#f0fdf4;padding:13px;border-radius:14px;margin-top:14px}
+input[type=checkbox]{width:22px;height:22px;accent-color:var(--green)}
+.safety{background:#fffaf0;border-color:#f5dfad;font-size:14px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
+@media(min-width:600px){.days{grid-template-columns:repeat(10,minmax(0,1fr))}.wrap{padding-top:28px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Твой личный челлендж</div>
+    <h1>Ровная спина<br>за 30 дней</h1>
+    <p>Небольшая ежедневная привычка для осанки. Отмечай выполненные дни и следи за прогрессом.</p>
+    <span class="pill">📱 Работает на телефоне и компьютере</span>
+  </section>
+
+  <section class="progress-card">
+    <div class="row"><strong>Твой прогресс</strong><strong id="progressText">0 из 30 дней</strong></div>
+    <div class="bar"><div class="fill" id="progressFill"></div></div>
+    <p class="muted" id="progressMessage">Начни с первого дня — маленькие шаги важны!</p>
+  </section>
+
+  <section class="task">
+    <div class="row"><span class="pill" id="weekPill">НЕДЕЛЯ 1</span><span class="muted" id="repLabel">5 повторений</span></div>
+    <div class="daytitle" id="dayTitle">День 1</div>
+    <p>Сегодняшнее задание</p>
+    <div class="exercise">
+      <strong>🧍 Ангел у стены</strong>
+      Встань у стены в удобном положении. Медленно поднимай и опускай согнутые руки настолько, насколько комфортно. Не прижимай руки силой и не прогибай поясницу.
+      <p class="muted" style="margin-bottom:0">Делай плавно. Если упражнение вызывает боль или дискомфорт — остановись и расскажи взрослому.</p>
+    </div>
+    <div class="checkrow">
+      <input type="checkbox" id="doneCheck">
+      <label for="doneCheck"><strong>Я выполнил задание этого дня</strong></label>
+    </div>
+    <div class="actions">
+      <button class="secondary" id="prevBtn">← Назад</button>
+      <button class="primary" id="nextBtn">Следующий день →</button>
+    </div>
+  </section>
+
+  <section class="calendar">
+    <h2>Календарь на 30 дней</h2>
+    <p class="muted">Нажми на день, чтобы открыть его задание. Зелёный цвет означает, что день отмечен выполненным.</p>
+    <div class="days" id="daysGrid"></div>
+  </section>
+
+  <section class="safety">
+    <strong>Важно для здоровья</strong>
+    <p>Это общий комплекс, а не лечение. Он не гарантирует исправление осанки за месяц. Не нужно насильно держать спину идеально прямой. Делай перерывы от сидения, двигайся в течение дня и попроси родителей помочь настроить стул и подставку для ног. Если сутулость заметна постоянно, попроси родителей обсудить её с педиатром.</p>
+  </section>
+  <footer>Прогресс сохраняется в этом браузере на этом устройстве. Для синхронизации между разными телефонами понадобится отдельное хранилище.</footer>
+</main>
+<script>
+const STORAGE_KEY = "rovnaya-spina-30-v1";
+let currentDay = 1;
+let completed = [];
+try { completed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch(e) { completed = []; }
+const repsFor = d => d <= 7 ? 5 : d <= 14 ? 7 : d <= 21 ? 8 : 10;
+const weekFor = d => Math.ceil(d/7);
+const $ = id => document.getElementById(id);
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(completed)); }
+function render(){
+  $("dayTitle").textContent = "День " + currentDay;
+  $("weekPill").textContent = "НЕДЕЛЯ " + weekFor(currentDay);
+  $("repLabel").textContent = repsFor(currentDay) + " повторений";
+  $("doneCheck").checked = completed.includes(currentDay);
+  $("prevBtn").disabled = currentDay === 1;
+  $("nextBtn").disabled = currentDay === 30;
+  $("progressText").textContent = completed.length + " из 30 дней";
+  $("progressFill").style.width = (completed.length/30*100) + "%";
+  $("progressMessage").textContent = completed.length === 30 ? "Ты отметил все 30 дней! Отличная работа." : completed.length ? "Продолжай в комфортном темпе — не нужно заниматься через силу." : "Начни с первого дня — маленькие шаги важны!";
+  const grid = $("daysGrid"); grid.innerHTML = "";
+  for(let d=1; d<=30; d++){
+    const b=document.createElement("button");
+    b.className="day"+(d===currentDay?" selected":"")+(completed.includes(d)?" done":"");
+    b.innerHTML=d+(completed.includes(d)?"<small>✓ Готово</small>":"<small>"+repsFor(d)+" повт.</small>");
+    b.setAttribute("aria-label","День "+d+(completed.includes(d)?", выполнен":""));
+    b.onclick=()=>{currentDay=d;render();window.scrollTo({top:0,behavior:"smooth"});};
+    grid.appendChild(b);
+  }
+}
+$("doneCheck").addEventListener("change",e=>{
+  if(e.target.checked){if(!completed.includes(currentDay))completed.push(currentDay);}
+  else completed=completed.filter(d=>d!==currentDay);
+  completed.sort((a,b)=>a-b);save();render();
+});
+$("prevBtn").onclick=()=>{currentDay=Math.max(1,currentDay-1);render();};
+$("nextBtn").onclick=()=>{currentDay=Math.min(30,currentDay+1);render();};
+render();
+</script>
+</body>
+</html>

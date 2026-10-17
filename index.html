@@ -1,122 +1,36 @@
 <!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#2563eb">
-<title>Ровная спина — 30 дней</title>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142c42"><title>Ровная спина — 30 дней</title>
 <style>
-:root{--blue:#2563eb;--pale:#eaf2ff;--green:#15803d;--ink:#172033;--muted:#657087;--line:#e4e9f2}
-*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.wrap{max-width:760px;margin:auto;padding:18px 14px 40px}
-.hero{background:linear-gradient(135deg,#dceafe,#f0f7ff);border-radius:24px;padding:24px 20px;margin-bottom:16px}
-.kicker{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#2457a7}
-h1{font-size:clamp(27px,7vw,38px);line-height:1.08;margin:8px 0 10px}
-p{line-height:1.5}.muted{color:var(--muted);font-size:14px}
-.progress-card,.task,.calendar,.safety{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0}
-.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.bar{height:10px;border-radius:99px;background:#e8edf5;overflow:hidden;margin-top:12px}.fill{height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .2s}
-h2{font-size:20px;margin:0 0 12px}.daytitle{font-size:24px;font-weight:800;margin:4px 0}
-.pill{display:inline-block;background:var(--pale);color:#2457a7;padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800}
-.exercise{background:#f8fafc;border-radius:16px;padding:14px;margin:12px 0}
-.exercise strong{display:block;margin-bottom:5px}
-button{font:inherit;border:0;border-radius:13px;padding:12px 14px;font-weight:750;cursor:pointer}
-.primary{background:var(--blue);color:white}.secondary{background:#edf1f7;color:var(--ink)}button:disabled{opacity:.4;cursor:not-allowed}
-.actions{display:flex;gap:10px;margin-top:14px}.actions button{flex:1}
-.days{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-.day{padding:11px 3px;background:#f0f3f8;color:#344054;border:2px solid transparent;border-radius:12px;min-height:49px}
-.day.selected{border-color:var(--blue);background:#eaf2ff;color:#1746a2}.day.done{background:#dcfce7;color:#166534}
-.day small{display:block;font-size:10px;margin-top:3px}
-.checkrow{display:flex;align-items:center;gap:10px;background:#f0fdf4;padding:13px;border-radius:14px;margin-top:14px}
-input[type=checkbox]{width:22px;height:22px;accent-color:var(--green)}
-.safety{background:#fffaf0;border-color:#f5dfad;font-size:14px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
-@media(min-width:600px){.days{grid-template-columns:repeat(10,minmax(0,1fr))}.wrap{padding-top:28px}}
-</style>
-</head>
-<body>
-<main class="wrap">
-  <section class="hero">
-    <div class="kicker">Твой личный челлендж</div>
-    <h1>Ровная спина<br>за 30 дней</h1>
-    <p>Небольшая ежедневная привычка для осанки. Отмечай выполненные дни и следи за прогрессом.</p>
-    <span class="pill">📱 Работает на телефоне и компьютере</span>
-  </section>
-
-  <section class="progress-card">
-    <div class="row"><strong>Твой прогресс</strong><strong id="progressText">0 из 30 дней</strong></div>
-    <div class="bar"><div class="fill" id="progressFill"></div></div>
-    <p class="muted" id="progressMessage">Начни с первого дня — маленькие шаги важны!</p>
-  </section>
-
-  <section class="task">
-    <div class="row"><span class="pill" id="weekPill">НЕДЕЛЯ 1</span><span class="muted" id="repLabel">5 повторений</span></div>
-    <div class="daytitle" id="dayTitle">День 1</div>
-    <p>Сегодняшнее задание</p>
-    <div class="exercise">
-      <strong>🧍 Ангел у стены</strong>
-      Встань у стены в удобном положении. Медленно поднимай и опускай согнутые руки настолько, насколько комфортно. Не прижимай руки силой и не прогибай поясницу.
-      <p class="muted" style="margin-bottom:0">Делай плавно. Если упражнение вызывает боль или дискомфорт — остановись и расскажи взрослому.</p>
-    </div>
-    <div class="checkrow">
-      <input type="checkbox" id="doneCheck">
-      <label for="doneCheck"><strong>Я выполнил задание этого дня</strong></label>
-    </div>
-    <div class="actions">
-      <button class="secondary" id="prevBtn">← Назад</button>
-      <button class="primary" id="nextBtn">Следующий день →</button>
-    </div>
-  </section>
-
-  <section class="calendar">
-    <h2>Календарь на 30 дней</h2>
-    <p class="muted">Нажми на день, чтобы открыть его задание. Зелёный цвет означает, что день отмечен выполненным.</p>
-    <div class="days" id="daysGrid"></div>
-  </section>
-
-  <section class="safety">
-    <strong>Важно для здоровья</strong>
-    <p>Это общий комплекс, а не лечение. Он не гарантирует исправление осанки за месяц. Не нужно насильно держать спину идеально прямой. Делай перерывы от сидения, двигайся в течение дня и попроси родителей помочь настроить стул и подставку для ног. Если сутулость заметна постоянно, попроси родителей обсудить её с педиатром.</p>
-  </section>
-  <footer>Прогресс сохраняется в этом браузере на этом устройстве. Для синхронизации между разными телефонами понадобится отдельное хранилище.</footer>
-</main>
+:root{--bg:#eef4f8;--card:#fff;--ink:#172b3a;--muted:#617486;--blue:#176b87;--mint:#c8f2e2;--line:#dce6ed}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#dceef5,#f4f7fa 330px);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink)}main{max-width:760px;margin:auto;padding:18px 14px 40px}.hero{background:linear-gradient(135deg,#17354c,#176b87);color:white;border-radius:24px;padding:24px 20px;box-shadow:0 12px 28px #15394a24}.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;opacity:.8;font-weight:800}h1{font-size:clamp(27px,7vw,39px);line-height:1.08;margin:10px 0}.hero p{margin:8px 0 0;color:#e0f4fa;line-height:1.5}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 10px;text-align:center}.stat strong{display:block;font-size:24px;color:var(--blue)}.stat span{font-size:12px;color:var(--muted)}.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:17px;margin:14px 0;box-shadow:0 5px 18px #19394a08}h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:0 0 6px}.small{font-size:13px;color:var(--muted);line-height:1.5}.progress-track{height:10px;border-radius:20px;background:#e5edf2;overflow:hidden;margin:10px 0 5px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#2bb58b,#8ad8b6);transition:width .2s}.days{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.day{border:1px solid var(--line);background:#f8fbfd;border-radius:11px;padding:10px 0;color:var(--ink);font-weight:700;cursor:pointer}.day.active{outline:3px solid #72c9b1;background:#e4f8ef}.day.done{background:#c8f2e2;border-color:#74c6a8}.day:focus-visible,button:focus-visible{outline:3px solid #f0b94c;outline-offset:2px}.exercise{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:15px;padding:13px;margin:9px 0;background:#fcfdfe}.exercise input{width:22px;height:22px;accent-color:#16866b;flex-shrink:0;margin-top:2px}.exercise .desc{flex:1}.dose{display:inline-block;margin-top:5px;background:#e6f4f8;color:#18566d;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}button{border:0;border-radius:12px;padding:11px 14px;font-weight:750;font-size:14px;cursor:pointer}.primary{background:#176b87;color:white}.secondary{background:#e7eef3;color:#203c4e}.timer{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f0f8fa;border-radius:14px;padding:13px;margin-top:12px}.timer strong{font-size:24px;font-variant-numeric:tabular-nums}.notice{background:#fff7df;border:1px solid #f2df9d;border-radius:14px;padding:13px;font-size:13px;line-height:1.5}.footer{text-align:center;font-size:12px;color:var(--muted);padding:10px}@media(min-width:560px){.days{grid-template-columns:repeat(10,1fr)}.panel{padding:20px}}
+</style></head><body><main>
+<header class="hero"><div class="kicker">Твой мягкий челлендж</div><h1>Ровная спина<br>за 30 дней 🌱</h1><p>Немного движения каждый день. Не сила, не соревнование — только комфортная привычка.</p></header>
+<section class="stats"><div class="stat"><strong id="completedDays">0</strong><span>дней завершено</span></div><div class="stat"><strong id="streak">0</strong><span>дней подряд</span></div><div class="stat"><strong id="percent">0%</strong><span>общий прогресс</span></div></section>
+<section class="panel"><h2>📅 Выбери день</h2><div class="days" id="days"></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="small" id="progressLabel">Выполнено 0 из 30 дней</div></section>
+<section class="panel"><h2 id="dayTitle">День 1</h2><p class="small">Отмечай упражнения после выполнения. Если сегодня устал — можно сделать меньше или отдохнуть.</p><div id="exerciseList"></div><div class="actions"><button class="primary" id="finishBtn">Завершить день ✓</button><button class="secondary" id="resetDayBtn">Снять отметки</button></div><div class="small" id="dayStatus" style="margin-top:10px" aria-live="polite"></div></section>
+<section class="panel"><h2>⏱️ Таймер для перерыва</h2><p class="small">Напомни себе встать и немного подвигаться после долгого сидения.</p><div class="timer"><div><div class="small">Осталось</div><strong id="timerText">20:00</strong></div><div class="actions"><button class="primary" id="timerStart">Старт</button><button class="secondary" id="timerReset">Сброс</button></div></div></section>
+<section class="panel"><h2>🏆 Маленькие награды</h2><div id="rewards" class="small">Отмечай выполненные дни, чтобы открывать награды.</div></section>
+<section class="notice"><strong>Важно для здоровья:</strong> этот челлендж помогает выработать привычку двигаться, но не гарантирует исправление искривления позвоночника за 30 дней. Не выпрямляйся силой и не делай упражнения через боль. Если спина болит или заметно искривлена, попроси родителя обсудить это с врачом. Упражнения ниже — лёгкие примеры, а не лечение.</section>
+<div class="footer">Прогресс сохраняется в этом браузере на этом устройстве. На другом устройстве он автоматически не появится.</div></main>
 <script>
-const STORAGE_KEY = "rovnaya-spina-30-v1";
-let currentDay = 1;
-let completed = [];
-try { completed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch(e) { completed = []; }
-const repsFor = d => d <= 7 ? 5 : d <= 14 ? 7 : d <= 21 ? 8 : 10;
-const weekFor = d => Math.ceil(d/7);
-const $ = id => document.getElementById(id);
-function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(completed)); }
-function render(){
-  $("dayTitle").textContent = "День " + currentDay;
-  $("weekPill").textContent = "НЕДЕЛЯ " + weekFor(currentDay);
-  $("repLabel").textContent = repsFor(currentDay) + " повторений";
-  $("doneCheck").checked = completed.includes(currentDay);
-  $("prevBtn").disabled = currentDay === 1;
-  $("nextBtn").disabled = currentDay === 30;
-  $("progressText").textContent = completed.length + " из 30 дней";
-  $("progressFill").style.width = (completed.length/30*100) + "%";
-  $("progressMessage").textContent = completed.length === 30 ? "Ты отметил все 30 дней! Отличная работа." : completed.length ? "Продолжай в комфортном темпе — не нужно заниматься через силу." : "Начни с первого дня — маленькие шаги важны!";
-  const grid = $("daysGrid"); grid.innerHTML = "";
-  for(let d=1; d<=30; d++){
-    const b=document.createElement("button");
-    b.className="day"+(d===currentDay?" selected":"")+(completed.includes(d)?" done":"");
-    b.innerHTML=d+(completed.includes(d)?"<small>✓ Готово</small>":"<small>"+repsFor(d)+" повт.</small>");
-    b.setAttribute("aria-label","День "+d+(completed.includes(d)?", выполнен":""));
-    b.onclick=()=>{currentDay=d;render();window.scrollTo({top:0,behavior:"smooth"});};
-    grid.appendChild(b);
-  }
-}
-$("doneCheck").addEventListener("change",e=>{
-  if(e.target.checked){if(!completed.includes(currentDay))completed.push(currentDay);}
-  else completed=completed.filter(d=>d!==currentDay);
-  completed.sort((a,b)=>a-b);save();render();
-});
-$("prevBtn").onclick=()=>{currentDay=Math.max(1,currentDay-1);render();};
-$("nextBtn").onclick=()=>{currentDay=Math.min(30,currentDay+1);render();};
-render();
-</script>
-</body>
-</html>
+const KEY='rovnayaSpina30_v2';
+const exercises=[
+{id:'wall',name:'Ангел у стены',desc:'Встань рядом со стеной и плавно двигай руками вверх-вниз только в удобном диапазоне. Не прижимай голову и спину силой.',dose:'5 мягких повторений'},
+{id:'shoulders',name:'Мягкое сведение лопаток',desc:'Расслабь плечи и аккуратно сведи лопатки. Не поднимай плечи к ушам и не прогибай поясницу.',dose:'5–10 повторений'},
+{id:'bird',name:'«Птица-собака» — лёгкий вариант',desc:'На четвереньках медленно вытягивай одну руку. Если удобно и устойчиво — добавь противоположную ногу. Не прогибай спину.',dose:'По 3–5 раз на сторону'},
+{id:'move',name:'Прогулка или активная игра',desc:'Выбери приятное движение: прогулку, танцы или игру. Не нужно весь день держать спину напряжённой.',dose:'10–20 минут по возможности'}];
+let state={day:1,checks:{},done:[]},seconds=1200,timer=null;
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved)state={...state,...saved}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function checks(){if(!state.checks[state.day])state.checks[state.day]={};return state.checks[state.day]}
+function done(d){return state.done.includes(d)}
+function renderDays(){const root=document.getElementById('days');root.innerHTML='';for(let d=1;d<=30;d++){const b=document.createElement('button');b.className='day'+(state.day===d?' active':'')+(done(d)?' done':'');b.textContent=(done(d)?'✓ ':'')+d;b.setAttribute('aria-label','День '+d);b.onclick=()=>{state.day=d;save();render()};root.appendChild(b)}}
+function renderExercises(){const root=document.getElementById('exerciseList');root.innerHTML='';const c=checks();exercises.forEach(ex=>{const l=document.createElement('label');l.className='exercise';const i=document.createElement('input');i.type='checkbox';i.checked=!!c[ex.id];i.onchange=()=>{c[ex.id]=i.checked;save();render()};const box=document.createElement('div');box.className='desc';const h=document.createElement('h3');h.textContent=ex.name;const p=document.createElement('div');p.className='small';p.textContent=ex.desc;const dose=document.createElement('span');dose.className='dose';dose.textContent=ex.dose;box.append(h,p,dose);l.append(i,box);root.appendChild(l)});document.getElementById('dayTitle').textContent='День '+state.day;const all=exercises.every(e=>c[e.id]);document.getElementById('dayStatus').textContent=done(state.day)?'Отлично! Этот день отмечен как завершённый. 🌟':all?'Все задания отмечены — можешь завершить день!':'Отметь выполненные задания. Можно завершить день и с пропущенными упражнениями.'}
+function renderStats(){const n=state.done.length;document.getElementById('completedDays').textContent=n;document.getElementById('percent').textContent=Math.round(n/30*100)+'%';document.getElementById('progressFill').style.width=n/30*100+'%';document.getElementById('progressLabel').textContent='Выполнено '+n+' из 30 дней';let s=0,d=state.day;while(d>=1&&done(d)){s++;d--}document.getElementById('streak').textContent=s;let r=[];if(n>=7)r.push('🥉 7 дней — бронзовая награда');if(n>=14)r.push('🥈 14 дней — серебряная награда');if(n>=30)r.push('🏆 30 дней — чемпион привычки!');document.getElementById('rewards').textContent=r.length?r.join(' • '):'🔒 Первая награда откроется после 7 завершённых дней.'}
+function render(){renderDays();renderExercises();renderStats()}
+document.getElementById('finishBtn').onclick=()=>{if(!done(state.day))state.done.push(state.day);save();render();document.getElementById('dayStatus').textContent='День сохранён! Молодец, что заботишься о себе. 🌟'};
+document.getElementById('resetDayBtn').onclick=()=>{state.checks[state.day]={};state.done=state.done.filter(d=>d!==state.day);save();render()};
+function showTimer(){document.getElementById('timerText').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}
+document.getElementById('timerStart').onclick=()=>{if(timer){clearInterval(timer);timer=null;document.getElementById('timerStart').textContent='Продолжить';return}document.getElementById('timerStart').textContent='Пауза';timer=setInterval(()=>{seconds--;showTimer();if(seconds<=0){clearInterval(timer);timer=null;document.getElementById('timerStart').textContent='Старт';document.getElementById('timerText').textContent='Пора размяться!'}},1000)};
+document.getElementById('timerReset').onclick=()=>{if(timer)clearInterval(timer);timer=null;seconds=1200;showTimer();document.getElementById('timerStart').textContent='Старт'};
+render();showTimer();
+</script></body></html>
